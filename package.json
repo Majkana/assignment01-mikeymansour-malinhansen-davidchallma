@@ -1,0 +1,23 @@
+{
+  "name": "assignment01-mikeymansour-malinhansen-davidchallma",
+  "version": "1.0.0",
+  "description": "Welcome to our automated testing for the hotel app.\r We are using Playwright and TypeScript.",
+  "main": "index.js",
+  "scripts": {
+    "testing": "npx playwright test",
+    "test-report": "npx playwright show-report",
+    "ui-mode": "npx playwright test --ui",
+    "codegen": "npx playwright codegen"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "@playwright/test": "^1.46.1",
+    "@types/node": "^22.5.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
