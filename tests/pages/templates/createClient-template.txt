@@ -10,9 +10,6 @@ email textfield
 telephone label
 telephone textfield
 save button
-options button
-editClient button
-deleteRoom button
 
 ACTIONS
 create new client

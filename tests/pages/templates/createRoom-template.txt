@@ -16,8 +16,6 @@ price textfield
 features multi options
 back button
 save button
-editRoom button
-deleteRoom button
 
 ACTIONS
 create new room
