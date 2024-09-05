@@ -1,0 +1,17 @@
+ELEMENTS:
+title
+location (URL)
+(welcome message)
+(logout button)
+createClient button
+back button
+options button
+editClient button
+deleteClient button
+
+ACTIONS
+(perform logout)
+navigate to create client page
+navigate to edit client page
+click delete client button
+click back button

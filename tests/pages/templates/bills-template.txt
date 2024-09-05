@@ -1,0 +1,17 @@
+ELEMENTS:
+title
+location (URL)
+(welcome message)
+(logout button)
+createBill button
+back button
+options button
+editBill button
+deleteBill button
+
+ACTIONS
+(perform logout)
+navigate to create bill page
+navigate to edit bill page
+click delete bill button
+click back button

@@ -1,0 +1,18 @@
+ELEMENTS:
+title
+location (URL)
+(welcome message)
+(logout button)
+start label
+start textfield
+end label
+end textfield
+client option
+room option
+bill option
+back button
+save button
+
+ACTIONS
+create new reservation
+go back

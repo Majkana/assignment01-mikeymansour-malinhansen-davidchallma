@@ -1,0 +1,17 @@
+ELEMENTS:
+title
+location (URL)
+(welcome message)
+(logout button)
+deleteBill button
+value label
+value textfield
+paid checkbox
+back button
+save button
+
+ACTIONS
+(perform logout)
+delete bill
+save changes
+click back button
