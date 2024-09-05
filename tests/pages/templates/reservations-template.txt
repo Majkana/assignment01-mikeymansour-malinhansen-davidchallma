@@ -1,0 +1,17 @@
+ELEMENTS:
+title
+location (URL)
+(welcome message)
+(logout button)
+createReservation button
+back button
+options button
+editReservation button
+deleteReservation button
+
+ACTIONS
+(perform logout)
+navigate to create reservation page
+navigate to edit reservation page
+click delete reservation button
+click back button

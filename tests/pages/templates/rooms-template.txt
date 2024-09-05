@@ -1,0 +1,17 @@
+ELEMENTS:
+title
+location (URL)
+(welcome message)
+(logout button)
+createRoom button
+back button
+options button
+editRoom button
+deleteRoom button
+
+ACTIONS
+(perform logout)
+navigate to create room page
+navigate to edit room page
+click delete room button
+click back button

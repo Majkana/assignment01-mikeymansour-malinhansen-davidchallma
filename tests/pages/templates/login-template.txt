@@ -1,0 +1,11 @@
+ELEMENTS:
+title
+location (URL)
+username label
+username textfield
+password label
+password textfield
+
+ACTIONS
+perform login with correct credentials
+perform login with wrong credentials

@@ -1,0 +1,24 @@
+ELEMENTS:
+title
+location (URL)
+(welcome message)
+(logout button)
+deleteRoom button
+category label
+category textfield
+number label
+number textfield
+floor label
+floor textfield
+available checkbox
+price label
+price textfield
+features multi options
+back button
+save button
+
+ACTIONS
+(perform logout)
+delete room
+save changes
+click back button

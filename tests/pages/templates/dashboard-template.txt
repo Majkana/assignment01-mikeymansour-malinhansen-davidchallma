@@ -1,0 +1,16 @@
+ELEMENTS:
+title
+location (URL)
+welcome message
+logout button
+roomsView button
+clientsView button
+billsView button
+reservationsView button
+
+ACTIONS
+perform logout
+navigate to rooms page
+navigate to clients page
+navigate to bills page
+navigate to reservations page

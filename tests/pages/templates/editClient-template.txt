@@ -1,0 +1,20 @@
+ELEMENTS:
+title
+location (URL)
+(welcome message)
+(logout button)
+deleteClient button
+name label
+name textfield
+email label
+email textfield
+telephone label
+telephone textfield
+back button
+save button
+
+ACTIONS
+(perform logout)
+delete client
+save changes
+click back button
