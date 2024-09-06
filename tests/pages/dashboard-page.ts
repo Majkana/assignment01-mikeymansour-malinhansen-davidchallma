@@ -1,8 +1,10 @@
-import { expect, type Locator, type Page } from '@playwright/test';
+import { type Locator, type Page } from '@playwright/test';
 
 export class DashboardPage {
     // attributes
     readonly page: Page;
+    readonly pageHeading: Locator;
+    readonly welcomeMessageUser: Locator;
     readonly logoutButton: Locator;
     readonly roomsViewButton: Locator;
     readonly clientsViewButton: Locator;
@@ -12,37 +14,35 @@ export class DashboardPage {
     // const
     constructor(page: Page) {
         this.page = page;
+        this.pageHeading = page.getByRole('heading', { name: 'Tester Hotel Overview' });
+        this.welcomeMessageUser = page.locator('#app > header > div > div > span');
         this.logoutButton = page.getByRole('button', { name: 'Logout' });
         this.roomsViewButton = page.locator('#app > div > div > div:nth-child(1) > a');
         this.clientsViewButton = page.locator('#app > div > div > div:nth-child(2) > a');
         this.billsViewButton = page.locator('#app > div > div > div:nth-child(3) > a');
         this.reservationsViewButton = page.locator('#app > div > div > div:nth-child(4) > a');
-}
+    }
 
     // methods / functions
-    async goToRoomView(){
-    
+    async goToRoomView() {
         await this.roomsViewButton.click();
     }
-    async goToClientView(){
 
+    async goToClientView() {
         await this.clientsViewButton.click();
     }
-    async goToBillsView(){
 
+    async goToBillsView() {
         await this.billsViewButton.click();
     }
-    async goToReservationView(){
 
+    async goToReservationView() {
         await this.reservationsViewButton.click();
     }
-    async performLogout() {
-    // click logout button
-    await this.logoutButton.click();
-}
 
-    // async pageObjectModel() {
-    //     await this.getStarted();
-    //     await this.pomLink.click();
-    // }
+    async performLogout() {
+        // click logout button
+        await this.logoutButton.click();
+    }
+
 }
