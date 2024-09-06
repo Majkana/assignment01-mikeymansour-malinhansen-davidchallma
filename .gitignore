@@ -5,3 +5,4 @@ node_modules/
 /playwright/.cache/
 .env
 malinstest.spec.ts
+example.spec.ts
