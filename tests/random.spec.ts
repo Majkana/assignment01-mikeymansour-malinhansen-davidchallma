@@ -48,6 +48,10 @@ test.describe('Test suite 01', () => {
     await dashboardPage.goToRoomView();
     await expect(roomsPage.pageHeading).toHaveText('Rooms');
     await roomsPage.goToCreateRoom();
+    await expect(createRoomPage.numberInputField).toBeEmpty();
+    await expect(createRoomPage.floorInputField).toBeEmpty();
+    await expect(createRoomPage.availableCheckbox).toBeEmpty();
+    await expect(createRoomPage.priceInputField).toBeEmpty();
     await createRoomPage.createNewRoom();
     await dashboardPage.performLogout();
     await page.waitForTimeout(1000);
