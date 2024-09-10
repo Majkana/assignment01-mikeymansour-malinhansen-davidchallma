@@ -28,7 +28,7 @@ async function globalSetup(config: FullConfig) {
   // ---------------------------
 
   // create 10 new clients
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     const fullName = faker.person.fullName();
     const emailAddress = faker.internet.email();
     const phoneNumber = faker.phone.number();
@@ -53,7 +53,7 @@ async function globalSetup(config: FullConfig) {
   // ---------------------------
 
   // create 10 new bills
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     const value = faker.finance.amount({ min: 1000, max: 10000, dec: 0 });
     const available = Boolean(Math.random() < 0.5);
     // console.log(available);
@@ -77,7 +77,7 @@ async function globalSetup(config: FullConfig) {
   // ---------------------------
 
   // create 10 new rooms
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     let floorNumber = faker.number.int({ min: 1, max: 20 }).toString();
     let roomNumber = faker.number.int({ min: 1, max: 9 }).toString();
     let roomPrice = faker.finance.amount({ min: 1000, max: 30000, dec: 0 });
@@ -176,7 +176,7 @@ async function globalSetup(config: FullConfig) {
   const numberOfBillOptions = billOptions.length;
 
   //  ----------> create the reservations <----------
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     const randomStartDate = faker.date.soon({ days: 365}).toLocaleDateString(locale);
     const randomEndDate = faker.date.soon({ days: 10, refDate: randomStartDate}).toLocaleDateString(locale);
     const randomClientNumber = faker.number.int({ min: 1, max: (numberOfClientOptions-1)});
