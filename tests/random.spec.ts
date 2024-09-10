@@ -180,4 +180,23 @@ test.describe('Test suite 01', () => {
     await expect(page.getByRole('link', { name: 'Create Client' })).toBeVisible();
   });
 
+  test('Delete bill throu Editview', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    const dashboardPage = new DashboardPage(page);
+    const billsPage = new BillsPage(page);
+    const editBillPage = new EditBillPage(page);
+
+    await loginPage.goto();
+    await loginPage.performLogin(`${process.env.TEST_USERNAME}`, `${process.env.TEST_PASSWORD}`);
+    await page.waitForTimeout(1000)
+
+    await dashboardPage.goToBillsView();
+    await page.waitForTimeout(1000);
+    await expect(page.getByText('Bills')).toBeVisible();
+
+    await billsPage.goToEditBill();
+    await editBillPage.deleteBill()
+    await expect(page.getByRole('link', { name: 'Create Bill' })).toBeVisible();
+    await page.waitForTimeout(1000);
+  });
 });
