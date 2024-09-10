@@ -1,9 +1,12 @@
-import { expect, type Locator, type Page } from '@playwright/test';
+import { type Locator, type Page } from '@playwright/test';
 
 export class BillsPage {
-
     readonly page: Page;
+    readonly pageUrl: String;
     readonly pageHeading: Locator;
+    readonly createBillButton: Locator;
+    readonly billElements: Locator;
+    readonly firstBillInList: Locator;
     readonly billOptionsButton: Locator;
     readonly editBillButton: Locator;
     readonly deleteBillButton: Locator;
@@ -11,7 +14,11 @@ export class BillsPage {
 
 constructor(page: Page){
     this.page = page;
-    this.pageHeading = page.getByText('Bills');
+    this.pageUrl = (`${process.env.BASE_URL}/bills`);
+    this.pageHeading = page.getByText('Bills', {exact: true});
+    this.createBillButton = page.getByRole('link', { name: 'Create Bill' });
+    this.billElements = page.locator('#app > div > div.bills > div.card.bill');
+    this.firstBillInList = page.locator('#app > div > div.bills > div:nth-child(1)');
     this.billOptionsButton = page.getByRole('img').first();
     this.editBillButton = page.getByText('Edit');
     this.deleteBillButton = page.getByText('Delete');

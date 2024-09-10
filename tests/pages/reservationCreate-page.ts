@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 
 const locale = 'sv-SE';
 
-export class CreateReservationPage {
+export class ReservationCreatePage {
     readonly page: Page;
     readonly pageHeading: Locator;
     readonly startDateField: Locator;

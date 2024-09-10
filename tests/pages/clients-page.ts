@@ -1,9 +1,12 @@
-import { expect, type Locator, type Page } from '@playwright/test';
+import { type Locator, type Page } from '@playwright/test';
 
-export class ClientPage {
+export class ClientsPage {
     readonly page: Page;
+    readonly pageUrl: String;
     readonly pageHeading: Locator;
     readonly createClientButton: Locator;
+    readonly clientElements: Locator;
+    readonly firstClientInList: Locator;
     readonly clientOptionsButton: Locator;
     readonly editClientButton: Locator;
     readonly deleteClientButton: Locator;
@@ -11,8 +14,11 @@ export class ClientPage {
     
     constructor(page: Page){
         this.page = page;
-        this.pageHeading = page.getByText('Clients');
+        this.pageUrl = (`${process.env.BASE_URL}/clients`);
+        this.pageHeading = page.getByText('Clients', {exact: true});
         this.createClientButton = page.getByRole('link', { name: 'Create Client' });
+        this.clientElements = page.locator('#app > div > div.clients > div.card.client');
+        this.firstClientInList = page.locator('#app > div > div.clients > div:nth-child(1) > div:nth-child(2)');
         this.clientOptionsButton = page.getByRole('img').first();
         this.editClientButton = page.getByText('Edit');
         this.deleteClientButton = page.getByText('Delete');
