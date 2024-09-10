@@ -1,4 +1,3 @@
-import { type FullConfig } from '@playwright/test';
 import { expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 
@@ -7,7 +6,7 @@ const test_username = process.env.TEST_USERNAME;
 const test_password = process.env.TEST_PASSWORD;
 const base_api = process.env.BASE_API;
 
-async function globalSetup(config: FullConfig) {
+async function testSetup() {
     // get access token
   const response = await fetch(`${base_api}/login`, {
     method: 'POST',
@@ -27,7 +26,7 @@ async function globalSetup(config: FullConfig) {
 
   // ---------------------------
 
-  // create 10 new clients
+  // create 5 new clients
   for (let i = 0; i < 5; i++) {
     const fullName = faker.person.fullName();
     const emailAddress = faker.internet.email();
@@ -52,7 +51,7 @@ async function globalSetup(config: FullConfig) {
 
   // ---------------------------
 
-  // create 10 new bills
+  // create 5 new bills
   for (let i = 0; i < 5; i++) {
     const value = faker.finance.amount({ min: 1000, max: 10000, dec: 0 });
     const available = Boolean(Math.random() < 0.5);
@@ -76,7 +75,7 @@ async function globalSetup(config: FullConfig) {
 
   // ---------------------------
 
-  // create 10 new rooms
+  // create 5 new rooms
   for (let i = 0; i < 5; i++) {
     let floorNumber = faker.number.int({ min: 1, max: 20 }).toString();
     let roomNumber = faker.number.int({ min: 1, max: 9 }).toString();
@@ -116,7 +115,7 @@ async function globalSetup(config: FullConfig) {
 
   // ---------------------------
 
-  // create 10 new reservations
+  // create 5 new reservations
 
   //  ----------> get clients <----------
   const getClientsResponse = await fetch(`${base_api}/clients`, {
@@ -203,4 +202,4 @@ async function globalSetup(config: FullConfig) {
   };
 };
 
-export default globalSetup;
+export default testSetup;

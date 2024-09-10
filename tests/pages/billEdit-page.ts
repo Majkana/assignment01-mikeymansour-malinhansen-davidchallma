@@ -1,9 +1,9 @@
-import { expect, type Locator, type Page } from '@playwright/test';
+import { type Locator, type Page } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 
-
-export class EditBillPage {
+export class BillEditPage {
     readonly page: Page;
+    readonly pageUrl: String;
     readonly pageHeading: Locator;
     readonly valueInputField: Locator;
     readonly paidCheckBox: Locator;
@@ -13,7 +13,8 @@ export class EditBillPage {
 
     constructor(page: Page) {
         this.page=page;
-        this.pageHeading = page.getByText('Bills');
+        this.pageUrl = (`${process.env.BASE_URL}/bill/`);
+        this.pageHeading = page.getByText('Bill:');
         this.valueInputField = page.getByRole('spinbutton');
         this.paidCheckBox = page.locator('.checkbox');
         this.saveBillButton = page.getByText('Save');
@@ -23,7 +24,6 @@ export class EditBillPage {
 
     async editBill() {
         const randomAmount = faker.finance.amount({ min: 1000, max: 10000, dec: 0 });
-
         await this.valueInputField.fill(randomAmount);
         await this.paidCheckBox.click();
         await this.saveBillButton.click();
@@ -36,4 +36,4 @@ export class EditBillPage {
     async deleteBill() {
         await this.deleteBillButton.click();
     };
-}
+};
