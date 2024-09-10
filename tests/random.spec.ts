@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test';
-import { faker } from '@faker-js/faker';
 import { LoginPage } from './pages/login-page';
 import { DashboardPage } from './pages/dashboard-page';
 import { RoomsPage } from './pages/rooms-page';
@@ -11,12 +10,33 @@ import { CreateReservationPage } from './pages/createReservation-page';
 import { ClientPage } from './pages/clients-page';
 import { EditClientPage } from './pages/editClient-page';
 
-const locale = 'sv-SE';
-const test_username:any = process.env.TEST_USERNAME;
-const test_password:any = process.env.TEST_PASSWORD;
+const test_username: any = process.env.TEST_USERNAME;
+const test_password: any = process.env.TEST_PASSWORD;
 
 test.describe('Test suite 01', () => {
-  test('Test 1 - Create new room', async ({ page }) => {
+  test('Test 1 - Perform login and logout', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    const dashboardPage = new DashboardPage(page);
+    await loginPage.goto();
+    await loginPage.performLogin(test_username, test_password);
+    await expect(dashboardPage.pageHeading).toBeVisible();
+
+    await dashboardPage.performLogout();
+    await expect(page.getByRole('heading', { name: 'Login' })).toBeVisible();
+
+    await page.waitForTimeout(1000);
+  });
+
+  test('Test 2 - Perform login with wrong credentials', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.goto();
+    await loginPage.performLogin('random', 'answer');
+    await page.waitForTimeout(1000);
+    await expect(page.getByText('Bad username or password')).toBeVisible();
+    await page.waitForTimeout(1000);
+  });
+
+  test('Test 3 - Create new room', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const dashboardPage = new DashboardPage(page);
     const roomsPage = new RoomsPage(page);
@@ -30,28 +50,6 @@ test.describe('Test suite 01', () => {
     await roomsPage.goToCreateRoom();
     await createRoomPage.createNewRoom();
     await dashboardPage.performLogout();
-    await page.waitForTimeout(1000);
-});
-
-  test('Test 2 - Perform login and logout', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const dashboardPage = new DashboardPage(page);
-    await loginPage.goto();
-    await loginPage.performLogin(test_username, test_password);
-    await expect(dashboardPage.pageHeading).toBeVisible();
-
-    await dashboardPage.performLogout();
-    await expect(page.getByRole('heading', { name: 'Login' })).toBeVisible();
-
-    await page.waitForTimeout(1000);
-  });
-
-  test('Test 3 - Perform login with wrong credentials', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.goto();
-    await loginPage.performLogin('random', 'answer');
-    await page.waitForTimeout(1000);
-    await expect(page.getByText('Bad username or password')).toBeVisible();
     await page.waitForTimeout(1000);
   });
 
@@ -85,7 +83,6 @@ test.describe('Test suite 01', () => {
     await expect(dashboardPage.pageHeading).toBeVisible();
   });
 
-
   test('Test 5 - Create a new reservation', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const dashboardPage = new DashboardPage(page);
@@ -107,7 +104,7 @@ test.describe('Test suite 01', () => {
     await expect(reservationsPage.createReservationButton).toBeVisible();
   });
 
-  test('Test 6 - Delete an existing reservation', async ({ page }) => {
+  test('Test 6 - Delete a reservation via options-button', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const dashboardPage = new DashboardPage(page);
     const reservationsPage = new ReservationsPage(page);
@@ -124,7 +121,7 @@ test.describe('Test suite 01', () => {
     await page.waitForTimeout(1000)
   });
 
-  test('Test 7 - Edit existing Bill', async ({ page }) => {
+  test('Test 7 - Edit a bill', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const dashboardPage = new DashboardPage(page);
     const billsPage = new BillsPage(page);
@@ -144,7 +141,7 @@ test.describe('Test suite 01', () => {
     await page.waitForTimeout(1000);
   });
 
-  test('Test 8 - Edit client', async ({ page }) => {
+  test('Test 8 - Edit a client', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const dashboardPage = new DashboardPage(page);
     const clientpage = new ClientPage(page);
@@ -165,7 +162,7 @@ test.describe('Test suite 01', () => {
     await page.waitForTimeout(1000)
   });
 
-  test('Test 9 - Delete client', async ({ page }) => {
+  test('Test 9 - Delete a client via options-button', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const dashboardPage = new DashboardPage(page);
     const clientpage = new ClientPage(page);
@@ -180,14 +177,14 @@ test.describe('Test suite 01', () => {
     await expect(page.getByRole('link', { name: 'Create Client' })).toBeVisible();
   });
 
-  test('Delete bill throu Editview', async ({ page }) => {
+  test('Test 10 - Delete bill throu edit view-page', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const dashboardPage = new DashboardPage(page);
     const billsPage = new BillsPage(page);
     const editBillPage = new EditBillPage(page);
 
     await loginPage.goto();
-    await loginPage.performLogin(`${process.env.TEST_USERNAME}`, `${process.env.TEST_PASSWORD}`);
+    await loginPage.performLogin(test_username, test_password);
     await page.waitForTimeout(1000)
 
     await dashboardPage.goToBillsView();
