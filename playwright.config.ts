@@ -12,6 +12,8 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  globalSetup: require.resolve('./global-setup'),
+  // globalTeardown: require.resolve('./global-teardown'),
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -30,6 +32,8 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    // headless: false,
+    screenshot: 'only-on-failure',
   },
 
   /* Configure projects for major browsers */
