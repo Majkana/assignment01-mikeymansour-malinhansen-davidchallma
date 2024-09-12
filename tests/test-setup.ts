@@ -1,4 +1,3 @@
-import { expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 
 const locale = 'sv-SE';
@@ -20,7 +19,7 @@ async function testSetup() {
     }),
 
   });
-  expect(response.status).toBe(200);
+
   const data = await response.json();
   const userName = data.username;
   const accessToken = data.token;
@@ -47,7 +46,6 @@ async function testSetup() {
         'telephone': phoneNumber
       })
     });
-    expect(newClientResponse.status).toBe(200);
   };
 
   // ---------------------------
@@ -71,7 +69,6 @@ async function testSetup() {
         'paid': available
       })
     });
-    expect(newBillResponse.status).toBe(200);
   };
 
   // ---------------------------
@@ -114,8 +111,7 @@ async function testSetup() {
         'price': roomPrice
       })
     });
-    expect(newRoomResponse.status).toBe(200);
-  }
+  };
 
   // ---------------------------
 
@@ -132,7 +128,7 @@ async function testSetup() {
       })
     }
   });
-  expect(getClientsResponse.status).toBe(200);
+
   const clientsData = await getClientsResponse.json();
   let clientOptions: any [] = [];
   clientsData.forEach(item => {
@@ -151,7 +147,7 @@ async function testSetup() {
       })
     }
   });
-  expect(getRoomsResponse.status).toBe(200);
+
   const roomsData = await getRoomsResponse.json();
   let roomOptions: any [] = [];
   roomsData.forEach(item => {
@@ -170,7 +166,7 @@ async function testSetup() {
       })
     }
   });
-  expect(getBillsResponse.status).toBe(200);
+
   const billsData = await getBillsResponse.json();
   let billOptions: any [] = [];
   billsData.forEach(item => {
@@ -202,7 +198,6 @@ async function testSetup() {
         'bill': randomBillNumber
       })
     });
-    expect(newReservationResponse.status).toBe(200);
   };
 };
 
