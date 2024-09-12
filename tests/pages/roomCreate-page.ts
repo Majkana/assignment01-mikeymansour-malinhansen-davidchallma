@@ -32,14 +32,17 @@ export class RoomCreatePage {
         let floorNumber = faker.number.int({ min: 1, max: 20 }).toString();
         let roomNumber = faker.number.int({ min: 1, max: 9 }).toString();
         let roomPrice = faker.finance.amount({ min: 1000, max: 30000, dec: 0 });
+
         const typeOptions = await this.categoryOptions.locator('option').allInnerTexts();
         const numberOfTypeOptions = typeOptions.length;
         const randomType = faker.number.int({ min: 0, max: (numberOfTypeOptions - 1) });
         await this.categoryOptions.selectOption(typeOptions[randomType].trim());
+
         await this.numberInputField.fill(floorNumber + 0 + roomNumber);
         await this.floorInputField.fill(floorNumber);
         await this.availableCheckbox.click();
         await this.priceInputField.fill(roomPrice);
+
         let featureOptions = await this.featuresMultipleOptions.locator('option').allInnerTexts();
         const numberOfFeatureOptions = featureOptions.length;
         let numberOfFeatures = faker.number.int({ min: 1, max: numberOfFeatureOptions });
@@ -50,6 +53,7 @@ export class RoomCreatePage {
             featureOptions.splice(randomFeature, 1);
         };
         await this.featuresMultipleOptions.selectOption(roomFeatures);
+        
         await this.saveButton.click();
     };
 
