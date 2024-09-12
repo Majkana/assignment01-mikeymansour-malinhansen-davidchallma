@@ -161,7 +161,7 @@ test.describe('Test suite 01', () => {
     await reservationsPage.deleteReservation();
     await expect(reservationsPage.backButton).toBeVisible();
     const reservationsAfterDelete = await reservationsPage.reservationElements.count();
-    expect(reservationsBeforeDelete - reservationsAfterDelete).toEqual(1);
+    expect(reservationsAfterDelete - reservationsBeforeDelete).toEqual(-1);
 
     await dashboardPage.performLogout();
   });
