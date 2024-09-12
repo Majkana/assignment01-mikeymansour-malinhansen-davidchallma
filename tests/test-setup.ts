@@ -5,6 +5,7 @@ const locale = 'sv-SE';
 const test_username = process.env.TEST_USERNAME;
 const test_password = process.env.TEST_PASSWORD;
 const base_api = process.env.BASE_API;
+const numberToAdd = 5; // number of clients, bills, rooms and reservations to add at start
 
 async function testSetup() {
     // get access token
@@ -27,7 +28,7 @@ async function testSetup() {
   // ---------------------------
 
   // create 5 new clients
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < numberToAdd; i++) {
     const fullName = faker.person.fullName();
     const emailAddress = faker.internet.email();
     const phoneNumber = faker.phone.number();
@@ -52,7 +53,7 @@ async function testSetup() {
   // ---------------------------
 
   // create 5 new bills
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < numberToAdd; i++) {
     const value = faker.finance.amount({ min: 1000, max: 10000, dec: 0 });
     const available = Boolean(Math.random() < 0.5);
     // console.log(available);
@@ -76,13 +77,15 @@ async function testSetup() {
   // ---------------------------
 
   // create 5 new rooms
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < numberToAdd; i++) {
     let floorNumber = faker.number.int({ min: 1, max: 20 }).toString();
     let roomNumber = faker.number.int({ min: 1, max: 9 }).toString();
     let roomPrice = faker.finance.amount({ min: 1000, max: 30000, dec: 0 });
+
     const typeOptions = ['double', 'single', 'twin'];
     const numberOfTypeOptions = typeOptions.length;
     const randomType = faker.number.int({ min: 0, max: (numberOfTypeOptions - 1) });
+
     let featureOptions = ['balcony', 'ensuite', 'sea view', 'penthouse'];
     const numberOfFeatureOptions = featureOptions.length;
     let numberOfFeatures = faker.number.int({ min: 1, max: numberOfFeatureOptions });
@@ -92,6 +95,7 @@ async function testSetup() {
       roomFeatures.push(featureOptions[randomFeature]);
       featureOptions.splice(randomFeature, 1);
     }
+    
     const newRoomResponse = await fetch(`${base_api}/room/new`, {
       method: 'POST',
       headers: {
@@ -175,7 +179,7 @@ async function testSetup() {
   const numberOfBillOptions = billOptions.length;
 
   //  ----------> create the reservations <----------
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < numberToAdd; i++) {
     const randomStartDate = faker.date.soon({ days: 365}).toLocaleDateString(locale);
     const randomEndDate = faker.date.soon({ days: 10, refDate: randomStartDate}).toLocaleDateString(locale);
     const randomClientNumber = faker.number.int({ min: 1, max: (numberOfClientOptions-1)});
