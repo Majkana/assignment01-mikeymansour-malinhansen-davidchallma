@@ -227,14 +227,12 @@ test.describe('Test suite 01', () => {
 
     await dashboardPage.goToClientView();
     const clientsBeforeDelete = await clientsPage.clientElements.count();
-    console.log(clientsBeforeDelete);
 
     await clientsPage.deleteClient();
     await expect(clientsPage.backButton).toBeVisible();
     const clientsAfterDelete = await clientsPage.clientElements.count();
-    console.log(clientsAfterDelete);
-    expect(clientsBeforeDelete - clientsAfterDelete).toEqual(1);
-
+    expect(clientsAfterDelete - clientsBeforeDelete).toEqual(-1);
+    
     await dashboardPage.performLogout();
   });
 
@@ -256,7 +254,7 @@ test.describe('Test suite 01', () => {
 
     await expect(billsPage.backButton).toBeVisible();
     const billsAfterDelete = await billsPage.billElements.count();
-    expect(billsBeforeDelete - billsAfterDelete).toEqual(1);
+    expect(billsAfterDelete - billsBeforeDelete).toEqual(-1);
 
     await dashboardPage.performLogout();
   });
